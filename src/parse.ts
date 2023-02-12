@@ -1,8 +1,8 @@
 import type { ParseOptions } from './types.js';
 
-export function parse<T extends object>(searchParams: URLSearchParams, opt?: ParseOptions): T {
+export function parse<T extends object>(searchParams: string | URLSearchParams, opt?: ParseOptions): T {
   const params = new URLSearchParams(
-    [...searchParams].map((
+    [...new URLSearchParams(searchParams)].map((
       [k, v]) =>
       [
         k.replace(/([[\]])/g, (_, s) => s === '[' ? '.' : ''),

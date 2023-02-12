@@ -2,18 +2,6 @@
   "name": "tqs",
   "version": "0.0.1-rc.0",
   "description": "Tiny and type-safe querystring library for the web",
-  "main": "index.js",
-  "type": "module",
-  "scripts": {
-    "test": "vitest --coverage",
-    "bench": "echo 'beanch';",
-    "lint": "echo 'lint';",
-    "lint:build": "echo 'lint';"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/motss/tqs.git"
-  },
   "keywords": [
     "tqs",
     "qs",
@@ -25,14 +13,56 @@
     "urlqueryparams",
     "query"
   ],
-  "author": "Rong Sen Ng (motss)",
-  "license": "MIT",
+  "homepage": "https://github.com/motss/tqs#readme",
   "bugs": {
     "url": "https://github.com/motss/tqs/issues"
   },
-  "homepage": "https://github.com/motss/tqs#readme",
-  "publishConfig": {
-    "access": "public"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/motss/tqs.git"
+  },
+  "funding": "https://github.com/motss/tqs?sponsor=1",
+  "license": "MIT",
+  "author": "Rong Sen Ng (motss)",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./parse": {
+      "types": "./dist/parse.d.ts",
+      "import": "./dist/parse.js",
+      "default": "./dist/parse.js"
+    },
+    "./dist/*": "./dist/*"
+  },
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "typings": "./dist/index.d.ts",
+  "files": [
+    "dist/*.*js.map",
+    "dist/*.*js",
+    "dist/*.d.ts.map",
+    "dist/*.d.ts",
+    "!**/*bench*/**/*.*",
+    "!**/*test*/**/*.*"
+  ],
+  "scripts": {
+    "bench": "vitest bench",
+    "build": "npm run clean && tsc",
+    "clean": "sh $(npm root)/@reallyland/tools/cleanup.sh",
+    "postinstall": "FILE=\"$(npm root)/@reallyland/tools/postinstall.sh\"; if [ -f \"$FILE\" ]; then sh \"$FILE\"; fi",
+    "lint": "sh $(npm root)/@reallyland/tools/lint-build.sh -c $(npm root)/@reallyland/tools/.eslintrc.json -s 'src/**/*.ts'",
+    "lint-commit": "sh $(npm root)/@reallyland/tools/lint-commit.sh",
+    "lint:build": "sh $(npm root)/@reallyland/tools/lint-build.sh -c $(npm root)/@reallyland/tools/browser/.build.eslintrc.json",
+    "pre-commit": "sh $(npm root)/@reallyland/tools/pre-commit.sh",
+    "test": "vitest --coverage",
+    "version": "sh $(npm root)/@reallyland/tools/generate-changelogs.sh && git add *CHANGELOG.md"
+  },
+  "dependencies": {
+    "tslib": "^2.5.0"
   },
   "devDependencies": {
     "@reallyland/tools": "^0.3.1",
@@ -41,7 +71,13 @@
     "vite": "^4.1.1",
     "vitest": "^0.28.4"
   },
-  "dependencies": {
-    "tslib": "^2.5.0"
+  "publishConfig": {
+    "access": "public"
+  },
+  "nano-staged": {
+    "*.ts": [
+      "npm run lint:build -- -f 1",
+      "git add"
+    ]
   }
 }

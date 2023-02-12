@@ -1,5 +1,8 @@
 {
   "files.insertFinalNewline": false,
   "typescript.preferences.importModuleSpecifierEnding": "js",
-  "typescript.tsdk": "node_modules/typescript/lib"
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "cSpell.words": [
+    "querystring"
+  ]
 }
