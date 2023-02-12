@@ -27,5 +27,8 @@
   "bugs": {
     "url": "https://github.com/motss/tqs/issues"
   },
-  "homepage": "https://github.com/motss/tqs#readme"
+  "homepage": "https://github.com/motss/tqs#readme",
+  "publishConfig": {
+    "access": "public"
+  }
 }
