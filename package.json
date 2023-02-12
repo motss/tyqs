@@ -1,27 +1,28 @@
 {
-  "name": "tqs",
+  "name": "tyqs",
   "version": "0.0.1-rc.1",
   "description": "Tiny and type-safe querystring library for the web",
   "keywords": [
-    "tqs",
     "qs",
+    "query",
+    "queryparams",
     "querystring",
     "querystringify",
-    "urlsearchparams",
     "searchparams",
-    "queryparams",
+    "tqs",
+    "tyqs",
     "urlqueryparams",
-    "query"
+    "urlsearchparams"
   ],
-  "homepage": "https://github.com/motss/tqs#readme",
+  "homepage": "https://github.com/motss/tyqs#readme",
   "bugs": {
-    "url": "https://github.com/motss/tqs/issues"
+    "url": "https://github.com/motss/tyqs/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/motss/tqs.git"
+    "url": "git+https://github.com/motss/tyqs.git"
   },
-  "funding": "https://github.com/motss/tqs?sponsor=1",
+  "funding": "https://github.com/motss/tyqs?sponsor=1",
   "license": "MIT",
   "author": "Rong Sen Ng (motss)",
   "type": "module",

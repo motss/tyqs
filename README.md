@@ -1,5 +1,5 @@
 <div align="center" style="text-align: center;">
-  <h1 style="border-bottom: none;">tqs</h1>
+  <h1 style="border-bottom: none;">tyqs</h1>
 
   <p>Tiny and type-safe querystring library for the web</p>
 </div>
@@ -44,7 +44,7 @@
 
 ```sh
 # Install via NPM
-$ npm i tqs
+$ npm i tyqs
 ```
 
 ## Usage
@@ -52,7 +52,7 @@ $ npm i tqs
 ### TypeScript or ES Modules
 
 ```ts
-import { parse } from 'tqs';
+import { parse } from 'tyqs';
 
 parse('a=a'); // { a: 'a' }
 parse('a=a&a=b'); // { a: ['a', 'b'] }
@@ -102,30 +102,30 @@ Please note that this project is released with a [Contributor Code of Conduct][c
 <!-- Badges -->
 [follow-me-badge]: https://flat.badgen.net/twitter/follow/igarshmyb?icon=twitter
 
-[version-badge]: https://flat.badgen.net/npm/v/tqs?icon=npm
-[mit-license-badge]: https://flat.badgen.net/npm/license/tqs
+[version-badge]: https://flat.badgen.net/npm/v/tyqs?icon=npm
+[mit-license-badge]: https://flat.badgen.net/npm/license/tyqs
 
-[downloads-badge]: https://flat.badgen.net/npm/dm/tqs
-[total-downloads-badge]: https://flat.badgen.net/npm/dt/tqs?label=total%20downloads
-[packagephobia-badge]: https://flat.badgen.net/packagephobia/install/tqs
-[bundlephobia-badge]: https://flat.badgen.net/bundlephobia/minzip/tqs
+[downloads-badge]: https://flat.badgen.net/npm/dm/tyqs
+[total-downloads-badge]: https://flat.badgen.net/npm/dt/tyqs?label=total%20downloads
+[packagephobia-badge]: https://flat.badgen.net/packagephobia/install/tyqs
+[bundlephobia-badge]: https://flat.badgen.net/bundlephobia/minzip/tyqs
 
-[ga-badge]: https://github.com/motss/tqs/actions/workflows/ci.yml/badge.svg
-[codecov-badge]: https://flat.badgen.net/codecov/c/github/motss/tqs?label=codecov&icon=codecov
+[ga-badge]: https://github.com/motss/tyqs/actions/workflows/ci.yml/badge.svg
+[codecov-badge]: https://flat.badgen.net/codecov/c/github/motss/tyqs?label=codecov&icon=codecov
 
 [coc-badge]: https://flat.badgen.net/badge/code%20of/conduct/pink
 
 <!-- Links -->
-[follow-me-url]: https://twitter.com/igarshmyb?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=motss/tqs
+[follow-me-url]: https://twitter.com/igarshmyb?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=motss/tyqs
 
-[version-url]: https://www.npmjs.com/package/tqs
+[version-url]: https://www.npmjs.com/package/tyqs
 [mit-license-url]: /LICENSE
 
-[downloads-url]: http://www.npmtrends.com/tqs
-[packagephobia-url]: https://packagephobia.now.sh/result?p=tqs
-[bundlephobia-url]: https://bundlephobia.com/result?p=tqs
+[downloads-url]: http://www.npmtrends.com/tyqs
+[packagephobia-url]: https://packagephobia.now.sh/result?p=tyqs
+[bundlephobia-url]: https://bundlephobia.com/result?p=tyqs
 
-[ga-url]: https://github.com/motss/tqs/actions/workflows/ci.yml
-[codecov-url]: https://codecov.io/gh/motss/tqs
+[ga-url]: https://github.com/motss/tyqs/actions/workflows/ci.yml
+[codecov-url]: https://codecov.io/gh/motss/tyqs
 
 [coc-url]: /code-of-conduct.md
