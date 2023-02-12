@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file. See [standa
 
 
 
+## [0.0.1-rc.2](https://github.com/motss/tyqs/compare/v0.0.1-rc.1...v0.0.1-rc.2) (2023-02-12)
+
+
+### chore
+
+* rename to tyqs as tqs is not allowed by NPM ([45a86fd](https://github.com/motss/tyqs/commit/45a86fd4127fbe8f2c7e63225e4d7b0c60741a5f))
+
+
+
 ## [0.0.1-rc.1](https://github.com/motss/tyqs/compare/v0.0.1-rc.0...v0.0.1-rc.1) (2023-02-12)
 
 
