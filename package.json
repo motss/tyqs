@@ -1,0 +1,31 @@
+{
+  "name": "tqs",
+  "version": "0.0.0",
+  "description": "Tiny and type-safe querystring library for the web",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "npm t"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/motss/tqs.git"
+  },
+  "keywords": [
+    "tqs",
+    "qs",
+    "querystring",
+    "querystringify",
+    "urlsearchparams",
+    "searchparams",
+    "queryparams",
+    "urlqueryparams",
+    "query"
+  ],
+  "author": "Rong Sen Ng (motss)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/motss/tqs/issues"
+  },
+  "homepage": "https://github.com/motss/tqs#readme"
+}
