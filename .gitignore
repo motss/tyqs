@@ -1,0 +1,23 @@
+# .gitignore 101 - https://www.quora.com/Does-gitignore-file-only-work-on-current-folder
+
+# dot files/ folders
+.*cache
+.build/
+.DS_Store
+.firebase/
+.nyc_output
+.tmp/
+*.env
+*.idea
+*.local
+*.log*
+*.tsbuildinfo
+
+# folders
+coverage*/
+dist*/
+log*/
+node_modules/
+web_modules/
+
+# Do not ignore
