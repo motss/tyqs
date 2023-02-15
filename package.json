@@ -69,6 +69,9 @@
     "test": "vitest --coverage",
     "version": "sh $(npm root)/@reallyland/tools/generate-changelogs.sh && git add *CHANGELOG.md"
   },
+  "dependencies": {
+    "tslib": "^2.5.0"
+  },
   "devDependencies": {
     "@reallyland/tools": "^0.3.1",
     "@vitest/coverage-c8": "^0.28.5",
@@ -84,8 +87,5 @@
       "npm run lint:build -- -f 1",
       "git add"
     ]
-  },
-  "dependencies": {
-    "tslib": "^2.5.0"
   }
 }
