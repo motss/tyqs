@@ -6,6 +6,7 @@
 
 <hr />
 
+<a href="https://www.buymeacoffee.com/RLmMhgXFb" target="_blank" rel="noopener noreferrer"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: 20px !important;width: auto !important;" ></a>
 [![Follow me][follow-me-badge]][follow-me-url]
 
 [![Version][version-badge]][version-url]
@@ -31,6 +32,7 @@
   - [TypeScript or ES Modules](#typescript-or-es-modules)
 - [API Reference](#api-reference)
   - [parse(searchParams\[, options\])](#parsesearchparams-options)
+  - [stringify(value)](#stringifyvalue)
 - [Contributing](#contributing)
   - [Code of Conduct](#code-of-conduct)
 - [License](#license)
@@ -74,6 +76,13 @@ parse('a[a].b=a,b'); // { a: { a: { b: ['a', 'b'] } } }
 - returns: <[object][object-mdn-url]> An object of decoded URL search params from a given string.
 
 This method decodes/ parses a string value into an object.
+
+### stringify(value)
+
+- `value` <`unknown`> Any value of unknown type. It accepts any JavaScript primitives and objects.
+- returns: <[string][string-mdn-url]> A string of encoded URL search params from a given input.
+
+This method encodes/ stringifies an input into a string.
 
 ## Contributing
 

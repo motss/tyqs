@@ -36,8 +36,8 @@ it.each<TestParams>([
     expected: { a: { a: ['a', 'b'] } },
   },
   {
-    params: 'a.a=a&a.a=b',
-    expected: { a: { a: ['a', 'b'] } },
+    params: 'a.a=a&a.b=b',
+    expected: { a: { a: 'a', b: 'b' } },
   },
   {
     params: 'a[a]=a',
@@ -46,6 +46,10 @@ it.each<TestParams>([
   {
     params: 'a[a]=a&a[a]=b',
     expected: { a: { a: ['a', 'b'] } },
+  },
+  {
+    params: 'a[a]=a&a[b]=b',
+    expected: { a: { a: 'a', b: 'b' } },
   },
   // comma separated
   {
@@ -128,9 +132,14 @@ it.each<TestParams>([
     expected: { a: ['a', 'b'] },
     options: { smart: false },
   },
-])('parses $params', ({ expected, options, params }) => {
+  {
+    params: 'a.a=a&a.b=b',
+    expected: { a: { a: ['a'], b: ['b'] } },
+    options: { smart: false },
+  },
+])('parses $params ($options)', ({ expected, options, params }) => {
   const searchParams = new URLSearchParams(params);
-  const value = parse(searchParams, options);
+  const result = parse(searchParams, options);
 
-  expect(value).toEqual(expected);
+  expect(result).toEqual(expected);
 });
