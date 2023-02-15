@@ -63,7 +63,7 @@ it.each<TestParams>([
     value: { a: () => true, b: async () => true, c: function(){return;}, d: async function(){return;} },
   },
   {
-    expected: 'a=class+TestA+%7B%0A++++++%7D',
+    expected: 'a=class+TestA+%7B%0A++++%7D',
     value: { a: class TestA {} },
   },
   {
