@@ -84,7 +84,7 @@ jobs:
           commit: 'chore: release package'
           publish: npm x -y -- changeset publish
           title: 'chore: release package'
-          version: npm x -y -- changeset publish
+          version: npm x -y -- changeset version
 
       # - name: Publish to npm (Prerelease)
       #   if: contains(github.ref, '-rc') == true || contains(github.ref, '-') == true
