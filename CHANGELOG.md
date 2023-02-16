@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.0-next.4
+
+### Patch Changes
+
+- [#12](https://github.com/motss/tyqs/pull/12) [`546700f`](https://github.com/motss/tyqs/commit/546700fb20cc2400f9c36c3ce8fabfaea2ada394) Thanks [@motss](https://github.com/motss)! - chore: bump version
+
 ## 0.1.0-next.3
 
 ### Minor Changes
