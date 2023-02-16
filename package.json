@@ -70,7 +70,7 @@
     "lint-commit": "sh $(npm root)/@reallyland/tools/lint-commit.sh",
     "lint:build": "sh $(npm root)/@reallyland/tools/lint-build.sh -c $(npm root)/@reallyland/tools/browser/.build.eslintrc.json",
     "pre-commit": "sh $(npm root)/@reallyland/tools/pre-commit.sh",
-    "publish": "changeset publish",
+    "release": "changeset publish",
     "test": "vitest --coverage",
     "version": "changeset version",
     "version2": "sh $(npm root)/@reallyland/tools/generate-changelogs.sh && git add *CHANGELOG.md"
