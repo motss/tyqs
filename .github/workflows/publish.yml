@@ -10,6 +10,7 @@ defaults:
     shell: bash
 
 env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
   NODE_VERSION: v0.0.0
   NPM_CACHE_DIR: ~/.npm
