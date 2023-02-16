@@ -6,18 +6,18 @@
 
 <hr />
 
-<a href="https://www.buymeacoffee.com/RLmMhgXFb" target="_blank" rel="noopener noreferrer"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: 20px !important;width: auto !important;" ></a>
+[![Buy me a coffee][buy-me-a-coffee-badge]][buy-me-a-coffee-url]
 [![Follow me][follow-me-badge]][follow-me-url]
 
-[![Version][version-badge]][version-url]
+[![npm-latest][npm-latest-badge]][npm-latest-url]
 [![MIT License][mit-license-badge]][mit-license-url]
 
 [![Downloads][downloads-badge]][downloads-url]
 [![Total downloads][total-downloads-badge]][downloads-url]
-[![Packagephobia][packagephobia-badge]][packagephobia-url]
-[![Bundlephobia][bundlephobia-badge]][bundlephobia-url]
 
-[![ci][ga-badge]][ga-url]
+[![Dependencies][dependencies-badge]][dependencies-url]
+[![ci][ga-ci-badge]][ga-ci-url]
+[![publish][ga-publish-badge]][ga-publish-url]
 [![codecov][codecov-badge]][codecov-url]
 
 [![Code of Conduct][coc-badge]][coc-url]
@@ -94,6 +94,8 @@ Please note that this project is released with a [Contributor Code of Conduct][c
 
 [MIT License](http://motss.mit-license.org/) © Rong Sen Ng (motss)
 
+
+
 <!-- References -->
 [ES Modules]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules
 [URLSearchParams]: https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams
@@ -109,32 +111,34 @@ Please note that this project is released with a [Contributor Code of Conduct][c
 [promise-mdn-url]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
 
 <!-- Badges -->
-[follow-me-badge]: https://flat.badgen.net/twitter/follow/igarshmyb?icon=twitter
+[buy-me-a-coffee-badge]: https://img.shields.io/badge/buy%20me%20a-coffee-ff813f?logo=buymeacoffee&style=flat-square
+[follow-me-badge]: https://img.shields.io/badge/follow-@igarshmyb-1d9bf0?logo=twitter&style=flat-square
 
-[version-badge]: https://flat.badgen.net/npm/v/tyqs?icon=npm
-[mit-license-badge]: https://flat.badgen.net/npm/license/tyqs
+[npm-latest-badge]: https://img.shields.io/npm/v/tyqs?color=blue&logo=npm&style=flat-square
+[mit-license-badge]: https://img.shields.io/npm/l/tyqs?color=blue&style=flat-square
 
-[downloads-badge]: https://flat.badgen.net/npm/dm/tyqs
-[total-downloads-badge]: https://flat.badgen.net/npm/dt/tyqs?label=total%20downloads
-[packagephobia-badge]: https://flat.badgen.net/packagephobia/install/tyqs
-[bundlephobia-badge]: https://flat.badgen.net/bundlephobia/minzip/tyqs
+[downloads-badge]: https://img.shields.io/npm/dm/tyqs?style=flat-square
+[total-downloads-badge]: https://img.shields.io/npm/dt/tyqs?label=total%20downloads&style=flat-square
 
-[ga-badge]: https://github.com/motss/tyqs/actions/workflows/ci.yml/badge.svg
-[codecov-badge]: https://flat.badgen.net/codecov/c/github/motss/tyqs?label=codecov&icon=codecov
+[dependencies-badge]: https://img.shields.io/librariesio/release/npm/tyqs/latest?style=flat-square
+[ga-ci-badge]: https://img.shields.io/github/actions/workflow/status/motss/tyqs/ci.yml?branch=main&label=ci&logo=githubactions&logoColor=white&style=flat-square
+[ga-publish-badge]: https://img.shields.io/github/actions/workflow/status/motss/tyqs/publish.yml?branch=main&label=publish&logo=githubactions&logoColor=white&style=flat-square
+[codecov-badge]: https://img.shields.io/codecov/c/github/motss/tyqs/main?label=codecov&logo=codecov&style=flat-square
 
-[coc-badge]: https://flat.badgen.net/badge/code%20of/conduct/pink
+[coc-badge]: https://img.shields.io/badge/code%20of-conduct-ed55bb?style=flat-square
 
 <!-- Links -->
+[buy-me-a-coffee-url]: https://www.buymeacoffee.com/RLmMhgXFb
 [follow-me-url]: https://twitter.com/igarshmyb?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=motss/tyqs
 
-[version-url]: https://www.npmjs.com/package/tyqs
+[npm-latest-url]: https://www.npmjs.com/package/tyqs/v/latest
 [mit-license-url]: /LICENSE
 
 [downloads-url]: http://www.npmtrends.com/tyqs
-[packagephobia-url]: https://packagephobia.now.sh/result?p=tyqs
-[bundlephobia-url]: https://bundlephobia.com/result?p=tyqs
 
-[ga-url]: https://github.com/motss/tyqs/actions/workflows/ci.yml
-[codecov-url]: https://codecov.io/gh/motss/tyqs
+[dependencies-url]: https://libraries.io/npm/tyqs
+[ga-ci-url]: https://github.com/motss/tyqs/actions/workflows/ci.yml
+[ga-publish-url]: https://github.com/motss/tyqs/actions/workflows/publish.yml
+[codecov-url]: https://codecov.io/gh/motss/tyqs/tree/main
 
 [coc-url]: /code-of-conduct.md
