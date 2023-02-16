@@ -3,7 +3,7 @@
   "changelog": [
     "@motss-changesets/changelog-github",
     {
-      "repo": "tyqs"
+      "repo": "motss/tyqs"
     }
   ],
   "commit": false,
