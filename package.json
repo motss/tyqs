@@ -26,7 +26,11 @@
   },
   "funding": "https://github.com/motss/tyqs?sponsor=1",
   "license": "MIT",
-  "author": "Rong Sen Ng (motss)",
+  "author": {
+    "name": "Rong Sen Ng (motss)",
+    "email": "contact@motss.app",
+    "url": "https://github.com/motss"
+  },
   "type": "module",
   "exports": {
     ".": {
@@ -66,13 +70,17 @@
     "lint-commit": "sh $(npm root)/@reallyland/tools/lint-commit.sh",
     "lint:build": "sh $(npm root)/@reallyland/tools/lint-build.sh -c $(npm root)/@reallyland/tools/browser/.build.eslintrc.json",
     "pre-commit": "sh $(npm root)/@reallyland/tools/pre-commit.sh",
+    "publish": "changeset publish",
     "test": "vitest --coverage",
-    "version": "sh $(npm root)/@reallyland/tools/generate-changelogs.sh && git add *CHANGELOG.md"
+    "version": "changeset version",
+    "version2": "sh $(npm root)/@reallyland/tools/generate-changelogs.sh && git add *CHANGELOG.md"
   },
   "dependencies": {
     "tslib": "^2.5.0"
   },
   "devDependencies": {
+    "@motss-changesets/changelog-github": "^1.0.0",
+    "@motss-changesets/cli": "^2.27.2",
     "@reallyland/tools": "^0.3.3",
     "@vitest/coverage-c8": "^0.28.5",
     "typescript": "^4.9.5",
@@ -81,5 +89,6 @@
   },
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "readme": "https://github.com/motss/README.md"
 }

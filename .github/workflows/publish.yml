@@ -2,8 +2,8 @@ name: publish
 
 on:
   push:
-    tags:
-      - 'v**'
+    branches:
+      - main
 
 defaults:
   run:
@@ -76,15 +76,22 @@ jobs:
         run: |
           npm pkg delete devDependencies nano-staged scripts
 
-      - name: Publish to npm (Prerelease)
-        if: contains(github.ref, '-rc') == true || contains(github.ref, '-') == true
-        run: |
-          npm publish . --tag=next
+      - name: Create release pull request or publish to npm
+        id: changesets
+        uses: changesets/action@v1
+        with:
+          publish: npm run release
+          version: npm run version
 
-      - name: Publish to npm
-        if: contains(github.ref, '-rc') == false && contains(github.ref, '-') == false
-        run: |
-          npm publish .
+      # - name: Publish to npm (Prerelease)
+      #   if: contains(github.ref, '-rc') == true || contains(github.ref, '-') == true
+      #   run: |
+      #     npm publish . --tag=next
+
+      # - name: Publish to npm
+      #   if: contains(github.ref, '-rc') == false && contains(github.ref, '-') == false
+      #   run: |
+      #     npm publish .
 
       # See https://github.com/actions/setup-node/issues/73.
       # - name: Setup node@${{ matrix.target }}
