@@ -82,9 +82,9 @@ jobs:
         uses: changesets/action@v1
         with:
           commit: 'chore: release package'
-          publish: npm run release
+          publish: npm x -y -- changeset publish
           title: 'chore: release package'
-          version: npm run version
+          version: npm x -y -- changeset publish
 
       # - name: Publish to npm (Prerelease)
       #   if: contains(github.ref, '-rc') == true || contains(github.ref, '-') == true
