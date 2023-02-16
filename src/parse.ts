@@ -56,3 +56,5 @@ export function parse<T extends object>(searchParams: string | URLSearchParams, 
 
   return t as T;
 }
+
+// FIXME: Add optional replacerFn

@@ -3,12 +3,14 @@
   "version": "0.0.1-rc.2",
   "description": "Tiny and type-safe querystring library for the web",
   "keywords": [
+    "parse",
     "qs",
     "query",
     "queryparams",
     "querystring",
     "querystringify",
     "searchparams",
+    "stringify",
     "tqs",
     "tyqs",
     "urlqueryparams",
@@ -36,6 +38,11 @@
       "types": "./dist/parse.d.ts",
       "import": "./dist/parse.js",
       "default": "./dist/parse.js"
+    },
+    "./stringify": {
+      "types": "./dist/stringify.d.ts",
+      "import": "./dist/stringify.js",
+      "default": "./dist/stringify.js"
     },
     "./dist/*": "./dist/*"
   },
@@ -66,19 +73,13 @@
     "tslib": "^2.5.0"
   },
   "devDependencies": {
-    "@reallyland/tools": "^0.3.1",
-    "@vitest/coverage-c8": "^0.28.4",
+    "@reallyland/tools": "^0.3.3",
+    "@vitest/coverage-c8": "^0.28.5",
     "typescript": "^4.9.5",
     "vite": "^4.1.1",
-    "vitest": "^0.28.4"
+    "vitest": "^0.28.5"
   },
   "publishConfig": {
     "access": "public"
-  },
-  "nano-staged": {
-    "*.ts": [
-      "npm run lint:build -- -f 1",
-      "git add"
-    ]
   }
 }
