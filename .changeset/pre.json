@@ -4,5 +4,9 @@
   "initialVersions": {
     "tyqs": "0.0.1-rc.2"
   },
-  "changesets": []
+  "changesets": [
+    "grumpy-moose-turn",
+    "loud-eggs-lick",
+    "wise-pandas-notice"
+  ]
 }
