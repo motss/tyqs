@@ -32,7 +32,7 @@
   - [TypeScript or ES Modules](#typescript-or-es-modules)
 - [API Reference](#api-reference)
   - [parse(searchParams\[, options\])](#parsesearchparams-options)
-  - [stringify(value)](#stringifyvalue)
+  - [stringify(value\[, replacer\])](#stringifyvalue-replacer)
 - [Contributing](#contributing)
   - [Code of Conduct](#code-of-conduct)
 - [License](#license)
@@ -70,19 +70,63 @@ parse('a[a].b=a,b'); // { a: { a: { b: ['a', 'b'] } } }
 ### parse(searchParams[, options])
 
 - `searchParams` <[string][string-mdn-url] | [URLSearchParams]> URL search parameters.
-- `options` <?[object][object-mdn-url]> Optional parsing options.
-  - `singles` <?[Array][array-mdn-url]<[string][string-mdn-url]>> A list of keys that need to be decoded as single string value instead of an array of values.
+- `options` <?[Object][object-mdn-url]> Optional parsing options.
+  - `replacer` <?[Function][function-mdn-url]> Optional replacer function that allows you to alter the returned value.
+  - `singles` <?[Array][array-mdn-url]<[string][string-mdn-url]>> Optional list of keys that need to be decoded as single string value instead of an array of values.
   - `smart` <?[boolean][boolean-mdn-url]> Defaults to true. The decoder will assume all URL search params to be an array of values. With smart mode enabled, it will not force a single-value search param into an array.
-- returns: <[object][object-mdn-url]> An object of decoded URL search params from a given string.
+- returns: <[Object][object-mdn-url]> An object of decoded URL search params from a given string.
 
 This method decodes/ parses a string value into an object.
 
-### stringify(value)
+### stringify(value[, replacer])
 
 - `value` <`unknown`> Any value of unknown type. It accepts any JavaScript primitives and objects.
+- `replacer` <?[Function][function-mdn-url]> Optional replacer function that allows you to alter the returned value.
+    - `init` <[Object][object-mdn-url]> Function parameters.
+      - `flattenedKey` <[string][string-mdn-url]> Flattened key, e.g. *`{ a: { b: { c: 'a' } } }`'s key will be flattened to `a.b.c`*.
+      - `key` <[string][string-mdn-url]> Raw key.
+      - `rawValue` <`unknown`> Raw value of any type.
+      - `value` <[string][string-mdn-url]> Stringified value.
 - returns: <[string][string-mdn-url]> A string of encoded URL search params from a given input.
 
-This method encodes/ stringifies an input into a string.
+This method encodes/ stringifies an input into a string. When a raw value is nullish, it will be omitted in the stringified output, e.g. *`{ a: null, b: undefined }` will return `''` as `null` and `undefined` are nullish values*.
+
+If you want to include nullish values in the stringified output, you can override that with an optional `replacer` function, like so:
+
+```ts
+const input = {
+  a: null,
+  b: undefined,
+  c: {
+    a: null,
+    d: {
+      a: undefined,
+    },
+  },
+  d() { return; }
+};
+
+function replacer({
+  rawValue,
+  value,
+  key,
+  flattenedKey,
+}) {
+  if (key === 'b' || flattenedKey === 'c.d.a') return '<nil>';
+  if (rawValue == null) return '';
+
+  /** Returning a nullish value to omit the current key-value pair in the output. */
+  if (typeof(rawValue) === 'function') return;
+
+  return value;
+}
+
+stringify(input);
+/** output: d=d%28%29+%7B+return%3B+%7D */
+
+stringify(input, replacer);
+/** output: a=&b=%3Cnil%3E&c.a=&c.d.a=%3Cnil%3E */
+```
 
 ## Contributing
 
@@ -102,13 +146,14 @@ Please note that this project is released with a [Contributor Code of Conduct][c
 
 <!-- MDN -->
 [array-mdn-url]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array
-[map-mdn-url]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map
-[string-mdn-url]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String
-[object-mdn-url]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object
-[number-mdn-url]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number
 [boolean-mdn-url]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean
+[function-mdn-url]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function
 [html-style-element-mdn-url]: https://developer.mozilla.org/en-US/docs/Web/API/HTMLStyleElement
+[map-mdn-url]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map
+[number-mdn-url]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number
+[object-mdn-url]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object
 [promise-mdn-url]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
+[string-mdn-url]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String
 
 <!-- Badges -->
 [buy-me-a-coffee-badge]: https://img.shields.io/badge/buy%20me%20a-coffee-ff813f?logo=buymeacoffee&style=flat-square
