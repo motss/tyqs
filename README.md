@@ -53,14 +53,20 @@ $ npm i tyqs
 
 ## Features
 
-| Feature | Description | Example |
-| --- | --- | --- |
-| parse | | |
-| stringify | | |
-| Parse multiple params with the same name | | |
-| Optional replacer function for parsing | | |
-| Optional replacer function for stringify | | |
-| Omit nullish value when parsing | | |
+| Support | Feature | Description | Example |
+| --- | --- | --- | --- |
+| ✅ | [parse] | Decodes URL search params into an object. | `parse('a=a&b=1')` returns `{ a: 'a', b: '1' }`. |
+| ✅ | [stringify] | Encodes an object into URL search params. | `stringify({ a: 'a', b: 1 })` gives `a=a&b=1`. |
+| ✅ | Parse multiple values | Parses comma-separated param into an array of values. | `parse('a=a,b')` returns `{ a: ['a', 'b'] }`. |
+| ✅ | Parse single value | Parses single-value param into a string. | `parse('a=a')` returns `{ a: 'a' }`. |
+| ✅ | Parse multiple params with the same name | Parses multiple params of the same name into an array of values. | `parse('a=a,b&a=c')` returns `{ a: ['a', 'b', 'c'] }`. |
+| ✅ | Parse nested params | Parses nested params with dot or bracket notation. | `parse('a.a=a&b[a]=b&c[a].b=c&d.a[b].c=d')` returns `{ a: { a: 'a' }, b: { a: 'b' }, c: { a: { b: 'c' } }, d: { a: { b: { c: 'd' } } } }`. |
+| ✅ | Stringify nested params | Stringifies nested params with dot or bracket notation. | `stringify({ a: { a: 'a' } } )` gives `a.a=a`. |
+| ✅ | Optional replacer function for parsing | Optionally alters final parsed value. | See [Optional replacer function][optional-replacer-function-url]. |
+| ✅ | Optional replacer function for stringify | Optionally alters final stringified value. | See [Optional replacer function][optional-replacer-function-url]. |
+| ✅ | Omit nullish value in stringify | By default, all nullish values are omitted when stringify an object. | `stringify({ a: 'a', b: undefined })` gives `a=a`. |
+| ❌ | Parse `a[0]=a&a[1]=b` into array | Not supported but it should work. For arrays, use comma-separated value. | `parse('a[0]=a&a[1]=b')` returns `{ a: { 1: 'a', 2: 'b' } }`. |
+| 🚧 | Stringify non-JavaScript primitives | Parses all non-JavaScript primitives with its best effort. | `stringify({ a() {return;} })` gives `a=a%28%29+%7Breturn%3B%7D`. |
 
 ## Usage
 
@@ -165,13 +171,13 @@ stringify(input, stringifyOptions.replacer);
 
 - `searchParams` <[string][string-mdn-url] | [URLSearchParams]> URL search parameters.
 - `replacer` <?[Function][function-mdn-url]> Optional replacer function that allows you to alter the final parsed value.
-  - `firstRawValue` <[Array][array-mdn-url]<[string][string-mdn-url]>> This returns an array of values of the first key-value pair of a given key, e.g. *`a=a&a=b` will return `a=['a']`*.
+  - `firstRawValue` <[Array][array-mdn-url]<[string][string-mdn-url]>> This returns an array of values of the first key-value pair of a given key, e.g. *`a=a&a=b` will return `{ a: ['a', 'b'] }`*.
   - `key` <[string][string-mdn-url]> Name of the key-value pair.
-  - `rawValue` <[Array][array-mdn-url]<[string][string-mdn-url]>> This returns an array of values of the all key-value pairs of the same key, e.g. *`a=a&a=b` will return `a=['a', 'b']`*.
-  - `value` <[string][string-mdn-url] | [Array][array-mdn-url]<[string][string-mdn-url]>> This returns the best value of a given key-value pair which is heuristically determined by the library, e.g. *`a=a,b&b=a&a=c` will return `a=['a', 'b', 'c']` (an array of values) and `b='a'` (single value)*.
+  - `rawValue` <[Array][array-mdn-url]<[string][string-mdn-url]>> This returns an array of values of the all key-value pairs of the same key, e.g. *`a=a&a=b` will return `{ a: ['a', 'b'] }`*.
+  - `value` <[string][string-mdn-url] | [Array][array-mdn-url]<[string][string-mdn-url]>> This returns the best value of a given key-value pair which is heuristically determined by the library, e.g. *`a=a,b&b=a&a=c` will return `{ a: ['a', 'b', 'c'] }` (an array of values) and `b='a'` (single value)*.
 - returns: <[Object][object-mdn-url]> An object of decoded URL search params from a given string.
 
-This method decodes/ parses a string value into an object. By default, the value of a key-value pairs of the same name are being retrieved via [URLSearchParams.prototype.getAll], e.g. *`a=a&a=b` will return `a=['a', 'b']`*. As you can see, this approach will be able to get all param values when you define multiple values of the same key. However, there is a downside which is when you have just **1** key-value pair and you expect it to be a single-value param, e.g. *`a=a&b=b` will give `a=['a']` and `b=['b']`* which does not look good yet creates confusion. So, the library automatically parses such single-value param into a single value instead, e.g. *`a=a&b=b` will always give `a='a'` and `b='b'`*.
+This method decodes/ parses a string value into an object. By default, the value of a key-value pairs of the same name are being retrieved via [URLSearchParams.prototype.getAll], e.g. *`a=a&a=b` will return `{ a: ['a', 'b'] }`*. As you can see, this approach will be able to get all param values when you define multiple values of the same key. However, there is a downside which is when you have just **1** key-value pair and you expect it to be a single-value param, e.g. *`a=a&b=b` will give `{ a: ['a'], b: ['b'] }`* which does not look good yet creates confusion. So, the library automatically parses such single-value param into a single value instead, e.g. *`a=a&b=b` will always give `{ a: 'a', b: 'b' }`*.
 
 In some use case, you might want it to behave differently. For that you can alter the outcome with the [optional `replacer` function][optional-replacer-function-url].
 
@@ -204,9 +210,11 @@ Please note that this project is released with a [Contributor Code of Conduct][c
 
 <!-- References -->
 [ES Modules]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules
-[URLSearchParams]: https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams
-[URLSearchParams.prototype.getAll]: https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams/getAll
 [optional-replacer-function-url]: #optional-replacer-function
+[parse]: #parsesearchparams-options
+[stringify]: #stringifyvalue-replacer
+[URLSearchParams.prototype.getAll]: https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams/getAll
+[URLSearchParams]: https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams
 
 <!-- MDN -->
 [array-mdn-url]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array
