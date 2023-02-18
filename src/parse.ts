@@ -15,7 +15,7 @@ export function parse<T extends object>(
   );
   const t = {} as Record<string, unknown>;
 
-  [...new Set(params.keys())].forEach((paramKey) => {
+  new Set(params.keys()).forEach((paramKey) => {
     const rawValue =
       params
         .getAll(paramKey)

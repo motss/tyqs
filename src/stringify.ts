@@ -35,10 +35,7 @@ export function stringify(
           replacer({ flattenedKey, key, rawValue, value }) :
           value;
 
-        vv != null && sp.append(
-          flattenedKey,
-          vv
-        );
+        vv != null && sp.append(flattenedKey, vv);
       }
     });
   }
