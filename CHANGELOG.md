@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-next.6
+
+### Minor Changes
+
+- [#16](https://github.com/motss/tyqs/pull/16) [`ca44c86`](https://github.com/motss/tyqs/commit/ca44c863a0ed8aca71a6fc339e4f5f5cefed8e61) Thanks [@motss](https://github.com/motss)! - feat: add optional replacer function in stringify function
+
+- [#16](https://github.com/motss/tyqs/pull/16) [`ca44c86`](https://github.com/motss/tyqs/commit/ca44c863a0ed8aca71a6fc339e4f5f5cefed8e61) Thanks [@motss](https://github.com/motss)! - feat: add optional replacer function in parse function
+
 ## 0.1.0-next.5
 
 ### Patch Changes

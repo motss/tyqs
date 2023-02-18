@@ -5,8 +5,10 @@
     "tyqs": "0.0.1-rc.2"
   },
   "changesets": [
+    "angry-foxes-tap",
     "grumpy-moose-turn",
     "loud-eggs-lick",
+    "nine-rockets-camp",
     "soft-buses-cover",
     "tidy-gorillas-refuse",
     "wise-pandas-notice"
