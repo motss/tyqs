@@ -1,34 +1,41 @@
-import type { Branded, WithStringify } from './types.js';
+import type { Branded, StringifyOptions, WithStringify } from './types.js';
 
 type BrandedObjectWithParent = WithStringify<Branded<Record<string, string | number | boolean>, '$$parent'>>;
 
-export function stringify(value: unknown): string {
-  if (!value) return '';
+export function stringify(
+  input: unknown,
+  replacer?: StringifyOptions['replacer']
+): string {
+  if (!input) return '';
 
-  const stack = [value];
+  const stack = [input];
   const sp = new URLSearchParams();
 
   while (stack.length) {
     const item = stack.pop() as Record<string, BrandedObjectWithParent>;
 
-    Object.entries(item).forEach(([k, v]) => {
-      if (k === '$$parent') return;
+    Object.entries(item).forEach(([key, rawValue]) => {
+      if ((rawValue == null && replacer == null) || key === '$$parent') return;
 
-      const typeOfValue = typeof(v);
-      const k1 = item.$$parent ? `${item.$$parent}.${k}` : k;
+      const typeOfValue = typeof(rawValue);
+      const flattenedKey = item.$$parent ? `${item.$$parent}.${key}` : key;
 
-      if (v != null && typeOfValue === 'object' && !Array.isArray(v)) {
-        v.$$parent = k1;
-        stack.push(v);
+      if (rawValue !== null && typeOfValue === 'object' && !Array.isArray(rawValue)) {
+        rawValue.$$parent = flattenedKey;
+        stack.push(rawValue);
       } else {
-        let v1 = typeOfValue === 'string' ? v : '';
+        let value = typeOfValue === 'string' ? rawValue : '';
 
-        if (Array.isArray(v)) v1 = v.join(',');
-        else if (v?.toJSON) v1 = v.toJSON();
-        else if (v?.toString) v1 = v.toString();
-        else v1 = String(v);
+        if (Array.isArray(rawValue)) value = rawValue.join(',');
+        else if (rawValue?.toJSON) value = rawValue.toJSON();
+        else if (rawValue?.toString) value = rawValue.toString();
+        else value = String(rawValue);
 
-        sp.append(k1, v1);
+        const vv = replacer ?
+          replacer({ flattenedKey, key, rawValue, value }) :
+          value;
+
+        vv != null && sp.append(flattenedKey, vv);
       }
     });
   }
@@ -37,5 +44,3 @@ export function stringify(value: unknown): string {
 
   return sp.toString();
 }
-
-// FIXME: Add optional replacerFn
