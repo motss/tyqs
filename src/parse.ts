@@ -1,6 +1,9 @@
 import type { ParseOptions } from './types.js';
 
-export function parse<T extends object>(searchParams: string | URLSearchParams, opt?: ParseOptions): T {
+export function parse<T extends object>(
+  searchParams: string | URLSearchParams,
+  replacer?: ParseOptions['replacer']
+): T {
   const params = new URLSearchParams(
     [...new URLSearchParams(searchParams)].map((
       [k, v]) =>
@@ -10,51 +13,48 @@ export function parse<T extends object>(searchParams: string | URLSearchParams, 
       ]
     )
   );
-  const { singles, smart } = opt || {};
-  const iss = new Set(singles);
-  const ism = smart ?? true;
   const t = {} as Record<string, unknown>;
 
-  [...new Set(params.keys())].forEach((key) => {
-    let k = key;
-    const isSingleSet = iss.has(key);
-    const lv = (
-      isSingleSet ?
-        params.get(key) as string :
-        params.getAll(key).join(',')
-    ).split(',').map(n => decodeURIComponent(n.replace(/\+/g, ' ')));
-    // single,l=1,smart=1 -> str
-    // single,l=1,smart=0 -> str
-    // single,l=2,smart=1 -> arr
-    // single,l=2,smart=0 -> arr
-    // multi,l=1,smart=1 -> str
-    // multi,l=1,smart=0 -> arr
-    // multi,l=2,smart=1 -> arr
-    // multi,l=2,smart=0 -> arr
-    let v: unknown = lv.length === 1 && (ism || isSingleSet) ? lv[0] : lv;
+  [...new Set(params.keys())].forEach((paramKey) => {
+    const rawValue =
+      params
+        .getAll(paramKey)
+        .join(',')
+        .split(',')
+        .map(n =>
+          decodeURIComponent(n.replace(/\+/g, ' '))
+        );
+    const value = rawValue.length === 1 ? rawValue[0] : rawValue;
 
-    if (k.includes('.')) {
-      const [f, ...kl] = k.split('.');
-      const o = t[f] || {};
+    let key = paramKey;
+    let v = replacer ?
+      replacer({
+        firstRawValue: (params.get(paramKey) as string).split(','),
+        key,
+        rawValue,
+        value,
+      }) :
+      value;
+
+    if (key.includes('.')) {
+      const [f, ...kl] = key.split('.');
+      const o = (t[f] || {}) as Record<string, unknown>;
       const l = kl.pop() as string;
 
       (
-        /* eslint-disable @typescript-eslint/no-explicit-any */
         kl.reduce(
-          (p, n) => ((p as any)[n] ||= {} as Record<string, never>),
+          (p, n) =>
+            (p[n] ??= {}) as Record<string, unknown>,
           o
-        ) as Record<string, unknown>
-        /* eslint-enable @typescript-eslint/no-explicit-any */
+        )
       )[l] = v;
 
-      k = f;
+      key = f;
       v = o;
     }
 
-    t[k] = v;
+    t[key] = v;
   });
 
   return t as T;
 }
-
-// FIXME: Add optional replacerFn

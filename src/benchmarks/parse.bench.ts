@@ -1,6 +1,12 @@
 import { bench } from 'vitest';
 
 import { parse } from '../parse.js';
+import type { ParseOptions } from '../types.js';
+
+interface BenchParams {
+  value: string;
+  options: ParseOptions;
+}
 
 bench('<empty_string>', () => {
   parse('');
@@ -31,32 +37,74 @@ bench('<empty_string>', () => {
   });
 });
 
+// optional replacer function
 ([
-  [
-    'a=a&a=b',
-    ['a'],
-  ],
-  [
-    'a=a,b&a=a',
-    ['a'],
-  ],
-  [
-    'a.a=a&a[a]=b',
-    ['a.a'],
-  ],
-] as [string, string[]][]).forEach(([value, singles]) => {
-  bench(`${value};options.singles=${singles.join(',')}`, () => {
-    parse(value, { singles });
-  });
-});
-
-[
-  'a=a',
-  'a=a&a=b',
-  'a=a,b',
-  'a.a=a&a.b=b',
-].forEach((value) => {
-  bench(`${value};options.smart=false`, () => {
-    parse(value, { smart: false });
+  {
+    options: {
+      replacer({ firstRawValue: [fv], key, value }) {
+        if (key === 'a' ) return fv;
+        return value;
+      },
+    },
+    value: 'a=a&a=b',
+  },
+  {
+    options: {
+      replacer({ firstRawValue, key, value }) {
+        if (key === 'a' ) return firstRawValue;
+        return value;
+      },
+    },
+    value: 'a=a,b&a=b',
+  },
+  {
+    options: {
+      replacer({ firstRawValue: [fv], key, value }) {
+        if (key === 'a.a') return fv;
+        return value;
+      },
+    },
+    value: 'a.a=a&a[a]=b',
+  },
+  {
+    options: {
+      replacer({ firstRawValue, key, value }) {
+        if (key === 'a') return firstRawValue.map(n => Number(n));
+        return value;
+      },
+    },
+    value: 'a=1,2,3',
+  },
+  {
+    options: {
+      replacer({ firstRawValue, key, value }) {
+        if (key === 'a') return firstRawValue.map(n => Number(n));
+        if (key === 'b') return firstRawValue.at(0) === 'true';
+        return value;
+      },
+    },
+    value: 'a=1,2,3&b=true',
+  },
+  {
+    options: {
+      replacer({ firstRawValue: [fv], key, value }) {
+        switch (key) {
+          case 'a': return Number(fv);
+          case 'b.a': return fv === 'true';
+          case 'c': return fv === '' ? undefined : fv;
+          case 'd': return fv === 'null' ? null : fv;
+          case 'e': return fv === 'undefined' ? undefined : fv;
+          default: return value;
+        }
+      },
+    },
+    value: 'a=1&b.a=true&c=&d=null&e=undefined',
+  },
+] as BenchParams[]).forEach(({
+  options,
+  value,
+}) => {
+  bench(`${value} (options: ${options})`, () => {
+    parse(value, options.replacer);
   });
 });

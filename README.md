@@ -28,8 +28,10 @@
 
 - [Pre-requisite](#pre-requisite)
 - [Install](#install)
+- [Features](#features)
 - [Usage](#usage)
   - [TypeScript or ES Modules](#typescript-or-es-modules)
+  - [Optional replacer function](#optional-replacer-function)
 - [API Reference](#api-reference)
   - [parse(searchParams\[, options\])](#parsesearchparams-options)
   - [stringify(value\[, replacer\])](#stringifyvalue-replacer)
@@ -49,6 +51,17 @@
 $ npm i tyqs
 ```
 
+## Features
+
+| Feature | Description | Example |
+| --- | --- | --- |
+| parse | | |
+| stringify | | |
+| Parse multiple params with the same name | | |
+| Optional replacer function for parsing | | |
+| Optional replacer function for stringify | | |
+| Omit nullish value when parsing | | |
+
 ## Usage
 
 ### TypeScript or ES Modules
@@ -65,35 +78,52 @@ parse('a[a].b=a'); // { a: { a: { b: 'a' } } }
 parse('a[a].b=a,b'); // { a: { a: { b: ['a', 'b'] } } }
 ```
 
-## API Reference
+### Optional replacer function
 
-### parse(searchParams[, options])
-
-- `searchParams` <[string][string-mdn-url] | [URLSearchParams]> URL search parameters.
-- `options` <?[Object][object-mdn-url]> Optional parsing options.
-  - `replacer` <?[Function][function-mdn-url]> Optional replacer function that allows you to alter the returned value.
-  - `singles` <?[Array][array-mdn-url]<[string][string-mdn-url]>> Optional list of keys that need to be decoded as single string value instead of an array of values.
-  - `smart` <?[boolean][boolean-mdn-url]> Defaults to true. The decoder will assume all URL search params to be an array of values. With smart mode enabled, it will not force a single-value search param into an array.
-- returns: <[Object][object-mdn-url]> An object of decoded URL search params from a given string.
-
-This method decodes/ parses a string value into an object.
-
-### stringify(value[, replacer])
-
-- `value` <`unknown`> Any value of unknown type. It accepts any JavaScript primitives and objects.
-- `replacer` <?[Function][function-mdn-url]> Optional replacer function that allows you to alter the returned value.
-    - `init` <[Object][object-mdn-url]> Function parameters.
-      - `flattenedKey` <[string][string-mdn-url]> Flattened key, e.g. *`{ a: { b: { c: 'a' } } }`'s key will be flattened to `a.b.c`*.
-      - `key` <[string][string-mdn-url]> Raw key.
-      - `rawValue` <`unknown`> Raw value of any type.
-      - `value` <[string][string-mdn-url]> Stringified value.
-- returns: <[string][string-mdn-url]> A string of encoded URL search params from a given input.
-
-This method encodes/ stringifies an input into a string. When a raw value is nullish, it will be omitted in the stringified output, e.g. *`{ a: null, b: undefined }` will return `''` as `null` and `undefined` are nullish values*.
-
-If you want to include nullish values in the stringified output, you can override that with an optional `replacer` function, like so:
+All functions provided accepts an optional `replacer` function to alter the final output of each parameter.
 
 ```ts
+// parse(searchParams, replacer)
+const searchParams = new URLSearchParams('a=1,2,3&b=true&c=&a=4');
+const parseOptions = {
+  replacer({
+    firstRawValue: [firstRawValue],
+    key,
+    rawValue,
+    value,
+  }) {
+    switch (key) {
+      case 'a': return rawValue.map(n => Number(n));
+      case 'b': return firstRawValue === 'true';
+      case 'c': return firstRawValue === '' ? undefined : firstRawValue;
+      default: return value;
+    }
+  },
+};
+
+parse(searchParams);
+/**
+ * output:
+ * {
+ *   a: ['1', '2', '3', '4'],
+ *   b: 'true',
+ *   c: '',
+ * }
+ */
+
+parse(searchParams, parseOptions.replacer);
+/**
+ * output:
+ * {
+ *   a: [1, 2, 3, 4],
+ *   b: true,
+ *   c: undefined,
+ * }
+ */
+
+
+
+// stringify(input, replacer)
 const input = {
   a: null,
   b: undefined,
@@ -105,28 +135,60 @@ const input = {
   },
   d() { return; }
 };
+const stringifyOptions = {
+  replacer({
+    rawValue,
+    value,
+    key,
+    flattenedKey,
+  }) {
+    if (key === 'b' || flattenedKey === 'c.d.a') return '<nil>';
+    if (rawValue == null) return '';
 
-function replacer({
-  rawValue,
-  value,
-  key,
-  flattenedKey,
-}) {
-  if (key === 'b' || flattenedKey === 'c.d.a') return '<nil>';
-  if (rawValue == null) return '';
+    /** Returning a nullish value to omit the current key-value pair in the output. */
+    if (typeof(rawValue) === 'function') return;
 
-  /** Returning a nullish value to omit the current key-value pair in the output. */
-  if (typeof(rawValue) === 'function') return;
-
-  return value;
-}
+    return value;
+  },
+};
 
 stringify(input);
 /** output: d=d%28%29+%7B+return%3B+%7D */
 
-stringify(input, replacer);
+stringify(input, stringifyOptions.replacer);
 /** output: a=&b=%3Cnil%3E&c.a=&c.d.a=%3Cnil%3E */
 ```
+
+## API Reference
+
+### parse(searchParams[, options])
+
+- `searchParams` <[string][string-mdn-url] | [URLSearchParams]> URL search parameters.
+- `replacer` <?[Function][function-mdn-url]> Optional replacer function that allows you to alter the final parsed value.
+  - `firstRawValue` <[Array][array-mdn-url]<[string][string-mdn-url]>> This returns an array of values of the first key-value pair of a given key, e.g. *`a=a&a=b` will return `a=['a']`*.
+  - `key` <[string][string-mdn-url]> Name of the key-value pair.
+  - `rawValue` <[Array][array-mdn-url]<[string][string-mdn-url]>> This returns an array of values of the all key-value pairs of the same key, e.g. *`a=a&a=b` will return `a=['a', 'b']`*.
+  - `value` <[string][string-mdn-url] | [Array][array-mdn-url]<[string][string-mdn-url]>> This returns the best value of a given key-value pair which is heuristically determined by the library, e.g. *`a=a,b&b=a&a=c` will return `a=['a', 'b', 'c']` (an array of values) and `b='a'` (single value)*.
+- returns: <[Object][object-mdn-url]> An object of decoded URL search params from a given string.
+
+This method decodes/ parses a string value into an object. By default, the value of a key-value pairs of the same name are being retrieved via [URLSearchParams.prototype.getAll], e.g. *`a=a&a=b` will return `a=['a', 'b']`*. As you can see, this approach will be able to get all param values when you define multiple values of the same key. However, there is a downside which is when you have just **1** key-value pair and you expect it to be a single-value param, e.g. *`a=a&b=b` will give `a=['a']` and `b=['b']`* which does not look good yet creates confusion. So, the library automatically parses such single-value param into a single value instead, e.g. *`a=a&b=b` will always give `a='a'` and `b='b'`*.
+
+In some use case, you might want it to behave differently. For that you can alter the outcome with the [optional `replacer` function][optional-replacer-function-url].
+
+### stringify(value[, replacer])
+
+- `value` <`unknown`> Any value of unknown type. It accepts any JavaScript primitives and objects.
+- `replacer` <?[Function][function-mdn-url]> Optional replacer function that allows you to alter the final stringified value.
+    - `init` <[Object][object-mdn-url]> Function parameters.
+      - `flattenedKey` <[string][string-mdn-url]> Flattened key, e.g. *`{ a: { b: { c: 'a' } } }`'s key will be flattened to `a.b.c`*.
+      - `key` <[string][string-mdn-url]> Raw key.
+      - `rawValue` <`unknown`> Raw value of any type.
+      - `value` <[string][string-mdn-url]> Stringified value.
+- returns: <[string][string-mdn-url]> A string of encoded URL search params from a given input.
+
+This method encodes/ stringifies an input into a string. When a raw value is nullish, it will be omitted in the stringified output, e.g. *`{ a: null, b: undefined }` will return `''` as `null` and `undefined` are nullish values*.
+
+If you want to include nullish values in the stringified output, you can override that with an [optional `replacer` function][optional-replacer-function-url].
 
 ## Contributing
 
@@ -143,6 +205,8 @@ Please note that this project is released with a [Contributor Code of Conduct][c
 <!-- References -->
 [ES Modules]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules
 [URLSearchParams]: https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams
+[URLSearchParams.prototype.getAll]: https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams/getAll
+[optional-replacer-function-url]: #optional-replacer-function
 
 <!-- MDN -->
 [array-mdn-url]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array

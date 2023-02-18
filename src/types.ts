@@ -5,9 +5,14 @@ export type Branded<T, Brand extends string> = T & {
 };
 
 export interface ParseOptions {
-  replacer?<T>(value: string): T;
-  singles?: string[];
-  smart?: boolean;
+  replacer?(init: ParseReplacerInit): unknown;
+}
+
+interface ParseReplacerInit {
+  firstRawValue: string[];
+  key: string;
+  rawValue: string[];
+  value: string | string[];
 }
 
 export interface StringifyOptions {

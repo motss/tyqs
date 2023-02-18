@@ -2,7 +2,10 @@ import type { Branded, StringifyOptions, WithStringify } from './types.js';
 
 type BrandedObjectWithParent = WithStringify<Branded<Record<string, string | number | boolean>, '$$parent'>>;
 
-export function stringify(input: unknown, replacer?: StringifyOptions['replacer']): string {
+export function stringify(
+  input: unknown,
+  replacer?: StringifyOptions['replacer']
+): string {
   if (!input) return '';
 
   const stack = [input];
@@ -44,5 +47,3 @@ export function stringify(input: unknown, replacer?: StringifyOptions['replacer'
 
   return sp.toString();
 }
-
-// FIXME: Add optional replacerFn
