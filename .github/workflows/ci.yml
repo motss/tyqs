@@ -69,13 +69,8 @@ jobs:
         run: |
           echo "Debugging `github` payload:"
 
-          echo "::group::$JSON"
-          echo "::endgroup::"
-
           echo "::group::${{ toJson(github) }}"
           echo "::endgroup::"
-        env:
-          JSON: ${{ toJSON(github) }}
 
       - name: Install dependencies
         run: |
