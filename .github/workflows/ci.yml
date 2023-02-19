@@ -65,6 +65,18 @@ jobs:
           restore-keys: |
             ${{ matrix.os }}-node-${{ env.NODE_VERSION }}-npm-${{ env.NPM_VERSION }}
 
+      - name: Debugging
+        run: |
+          echo "Debugging `github` payload:"
+
+          echo "::group::$JSON"
+          echo "::endgroup::"
+
+          echo "::group::${{ toJson(github) }}"
+          echo "::endgroup::"
+        env:
+          JSON: ${{ toJSON(github) }}
+
       - name: Install dependencies
         run: |
           npm pkg delete scripts.postinstall
