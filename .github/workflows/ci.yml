@@ -26,7 +26,7 @@ env:
 
 jobs:
   lint:
-    if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.event.head_commit.message, 'docs:') && !contains(github.event.head_commit.message, 'chore(release)')"
+    if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.event.head_commit.message, 'chore(release)')"
     env:
       IS_UBUNTU: ${{ contains(matrix.os, 'ubuntu') }}
     name: lint - ${{ matrix.os }} ${{ matrix.target }}
@@ -64,6 +64,13 @@ jobs:
           key: ${{ matrix.os }}-node-${{ env.NODE_VERSION }}-npm-${{ env.NPM_VERSION }}-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ matrix.os }}-node-${{ env.NODE_VERSION }}-npm-${{ env.NPM_VERSION }}
+
+      - name: Debugging
+        run: |
+          echo "Debugging `github` payload:"
+
+          echo "::group::${{ toJson(github) }}"
+          echo "::endgroup::"
 
       - name: Install dependencies
         run: |
