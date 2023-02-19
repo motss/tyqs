@@ -8,7 +8,7 @@ testCasesForStringify
   .forEach(({ input, options }) => {
     const paramName1 = input === '' ? '<empty_string>' : JSON.stringify(input);
     const paramName2 = options?.replacer && '[Function replacer]';
-    const benchName = `${stringify.name}(${paramName1}, ${paramName2})`;
+    const benchName = `${paramName1}, ${paramName2}`;
 
     bench(benchName, () => {
       stringify(input, options?.replacer);

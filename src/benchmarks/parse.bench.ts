@@ -11,7 +11,7 @@ testCasesForParse
   }) => {
     const paramName1 = params === '' ? '<empty_string>' : params;
     const paramName2 = options?.replacer && '[Function replacer]';
-    const benchName = `${parse.name}(${paramName1}, ${paramName2})`;
+    const benchName = `${paramName1}, ${paramName2}`;
 
     bench(benchName, () => {
       parse(params, options?.replacer);
