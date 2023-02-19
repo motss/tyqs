@@ -261,8 +261,8 @@ Please note that this project is released with a [Contributor Code of Conduct][c
 [downloads-url]: http://www.npmtrends.com/tyqs
 
 [dependencies-url]: https://libraries.io/npm/tyqs
-[ga-ci-url]: https://github.com/motss/tyqs/actions/workflows/ci.yml
-[ga-publish-url]: https://github.com/motss/tyqs/actions/workflows/publish.yml
-[codecov-url]: https://codecov.io/gh/motss/tyqs/tree/main
+[ga-ci-url]: https://github.com/motss/tyqs/actions/workflows/ci.yml?query=branch%3Amain
+[ga-publish-url]: https://github.com/motss/tyqs/actions/workflows/publish.yml?query=branch%3Amain
+[codecov-url]: https://app.codecov.io/gh/motss/tyqs/tree/main
 
 [coc-url]: /code-of-conduct.md
