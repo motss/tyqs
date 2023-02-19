@@ -6,6 +6,9 @@ on:
       - '**'
     paths-ignore:
       - '**/*.md'
+  push: # run ci workflow so thats status badges can always point to main branch.
+    branches:
+      - main
 
 concurrency:
       group: ${{ github.workflow }}-${{ github.ref || github.run_id }}

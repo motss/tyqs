@@ -245,8 +245,8 @@ Please note that this project is released with a [Contributor Code of Conduct][c
 [total-downloads-badge]: https://img.shields.io/npm/dt/tyqs?label=total%20downloads&style=flat-square
 
 [dependencies-badge]: https://img.shields.io/librariesio/release/npm/tyqs/latest?style=flat-square
-[ga-ci-badge]: https://img.shields.io/github/actions/workflow/status/motss/tyqs/ci.yml?label=ci&logo=githubactions&logoColor=white&style=flat-square
-[ga-publish-badge]: https://img.shields.io/github/actions/workflow/status/motss/tyqs/publish.yml?label=publish&logo=githubactions&logoColor=white&style=flat-square
+[ga-ci-badge]: https://img.shields.io/github/actions/workflow/status/motss/tyqs/ci.yml?branch=main&label=ci&logo=githubactions&logoColor=white&style=flat-square
+[ga-publish-badge]: https://img.shields.io/github/actions/workflow/status/motss/tyqs/publish.yml?branch=main&label=publish&logo=githubactions&logoColor=white&style=flat-square
 [codecov-badge]: https://img.shields.io/codecov/c/github/motss/tyqs/main?label=codecov&logo=codecov&style=flat-square
 
 [coc-badge]: https://img.shields.io/badge/code%20of-conduct-ed55bb?style=flat-square
@@ -261,8 +261,8 @@ Please note that this project is released with a [Contributor Code of Conduct][c
 [downloads-url]: http://www.npmtrends.com/tyqs
 
 [dependencies-url]: https://libraries.io/npm/tyqs
-[ga-ci-url]: https://github.com/motss/tyqs/actions/workflows/ci.yml
-[ga-publish-url]: https://github.com/motss/tyqs/actions/workflows/publish.yml
-[codecov-url]: https://codecov.io/gh/motss/tyqs/tree/main
+[ga-ci-url]: https://github.com/motss/tyqs/actions/workflows/ci.yml?query=branch%3Amain
+[ga-publish-url]: https://github.com/motss/tyqs/actions/workflows/publish.yml?query=branch%3Amain
+[codecov-url]: https://app.codecov.io/gh/motss/tyqs/tree/main
 
 [coc-url]: /code-of-conduct.md
