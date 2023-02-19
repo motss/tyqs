@@ -1,0 +1,8 @@
+{
+  "mode": "pre",
+  "tag": "rc",
+  "initialVersions": {
+    "tyqs": "0.1.0"
+  },
+  "changesets": []
+}
