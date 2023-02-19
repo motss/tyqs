@@ -1,5 +1,27 @@
 # Changelog
 
+## 0.1.0
+
+### Minor Changes
+
+- [#16](https://github.com/motss/tyqs/pull/16) [`ca44c86`](https://github.com/motss/tyqs/commit/ca44c863a0ed8aca71a6fc339e4f5f5cefed8e61) Thanks [@motss](https://github.com/motss)! - feat: add optional replacer function in stringify function
+
+- [#6](https://github.com/motss/tyqs/pull/6) [`fa344eb`](https://github.com/motss/tyqs/commit/fa344eb7f8312c7bd64aff497ac795ad2643e1d5) Thanks [@motss](https://github.com/motss)! - feat: add stringify
+
+- [#6](https://github.com/motss/tyqs/pull/6) [`fa344eb`](https://github.com/motss/tyqs/commit/fa344eb7f8312c7bd64aff497ac795ad2643e1d5) Thanks [@motss](https://github.com/motss)! - feat: add parse
+
+- [#16](https://github.com/motss/tyqs/pull/16) [`ca44c86`](https://github.com/motss/tyqs/commit/ca44c863a0ed8aca71a6fc339e4f5f5cefed8e61) Thanks [@motss](https://github.com/motss)! - feat: add optional replacer function in parse function
+
+### Patch Changes
+
+- [#18](https://github.com/motss/tyqs/pull/18) [`25d166b`](https://github.com/motss/tyqs/commit/25d166bd97126da65888ae15f65267df107dff87) Thanks [@motss](https://github.com/motss)! - chore: standardize test cases for tests and benchmarks
+
+- [#14](https://github.com/motss/tyqs/pull/14) [`ab983d1`](https://github.com/motss/tyqs/commit/ab983d11321ec04811b646b76b9da36c9533fd6f) Thanks [@motss](https://github.com/motss)! - docs: update badges in README
+
+- [#12](https://github.com/motss/tyqs/pull/12) [`546700f`](https://github.com/motss/tyqs/commit/546700fb20cc2400f9c36c3ce8fabfaea2ada394) Thanks [@motss](https://github.com/motss)! - chore: bump version
+
+- [#8](https://github.com/motss/tyqs/pull/8) [`56b4a6b`](https://github.com/motss/tyqs/commit/56b4a6bf3ff97b8bcf46827fd052096c7dc378f5) Thanks [@motss](https://github.com/motss)! - ci: fix changeset release
+
 ## 0.1.0-next.7
 
 ### Patch Changes
