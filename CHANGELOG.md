@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.0-next.7
+
+### Patch Changes
+
+- [#18](https://github.com/motss/tyqs/pull/18) [`25d166b`](https://github.com/motss/tyqs/commit/25d166bd97126da65888ae15f65267df107dff87) Thanks [@motss](https://github.com/motss)! - chore: standardize test cases for tests and benchmarks
+
 ## 0.1.0-next.6
 
 ### Minor Changes
