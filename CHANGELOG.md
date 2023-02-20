@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.1.1
+
+### Patch Changes
+
+- [#25](https://github.com/motss/tyqs/pull/25) [`9cf2d54`](https://github.com/motss/tyqs/commit/9cf2d5461b222a7bd462ece527999fe82ac5355b) Thanks [@motss](https://github.com/motss)! - ci: remove docs: check in ci.yml
+
+- [#26](https://github.com/motss/tyqs/pull/26) [`e80da3c`](https://github.com/motss/tyqs/commit/e80da3cab425830d215aaef134e3bd9168ef358f) Thanks [@motss](https://github.com/motss)! - ci: fix debugging in ci.yml
+
+- [#23](https://github.com/motss/tyqs/pull/23) [`52d716d`](https://github.com/motss/tyqs/commit/52d716d2c75a3b6d84b2583f11a17408a27a1bdc) Thanks [@motss](https://github.com/motss)! - docs: update status badges to point to main branch
+
 ## 0.1.1-rc.0
 
 ### Patch Changes
