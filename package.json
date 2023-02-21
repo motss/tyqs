@@ -16,13 +16,13 @@
     "urlqueryparams",
     "urlsearchparams"
   ],
-  "homepage": "https://github.com/motss/tyqs#readme",
+  "homepage": "https://github.com/motss/tyqs",
   "bugs": {
     "url": "https://github.com/motss/tyqs/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/motss/tyqs.git"
+    "url": "git@github.com:motss/tyqs.git"
   },
   "funding": "https://github.com/motss/tyqs?sponsor=1",
   "license": "MIT",
@@ -70,8 +70,6 @@
     "lint-commit": "sh $(npm root)/@reallyland/tools/lint-commit.sh",
     "lint:build": "sh $(npm root)/@reallyland/tools/lint-build.sh -c $(npm root)/@reallyland/tools/browser/.build.eslintrc.json",
     "pre-commit": "sh $(npm root)/@reallyland/tools/pre-commit.sh",
-    "pre:enter": "npm x -y -- changeset pre enter rc",
-    "pre:exit": "npm x -y -- changeset pre exit",
     "test": "vitest --coverage",
     "version": "sh $(npm root)/@reallyland/tools/generate-changelogs.sh && git add *CHANGELOG.md"
   },
@@ -90,5 +88,5 @@
   "publishConfig": {
     "access": "public"
   },
-  "readme": "https://github.com/motss/README.md"
+  "readme": "https://github.com/motss/tyqs/blob/main/README.md"
 }
