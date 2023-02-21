@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.2
+
+### Patch Changes
+
+- [#29](https://github.com/motss/tyqs/pull/29) [`4289b46`](https://github.com/motss/tyqs/commit/4289b4662922607e3a00654814836f60d3cfb91b) Thanks [@motss](https://github.com/motss)! - chore: fix package.json having invalid values
+
 ## 0.1.1
 
 ### Patch Changes
