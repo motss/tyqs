@@ -1,6 +1,6 @@
 {
   "name": "tyqs",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Tiny and type-safe querystring library for the web",
   "keywords": [
     "parse",
