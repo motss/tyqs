@@ -8,21 +8,20 @@ export function stringify(
 ): string {
   if (!input) return '';
 
-  const stack = [input];
+  const stack = [['', input]];
   const sp = new URLSearchParams();
 
   while (stack.length) {
-    const item = stack.pop() as Record<string, BrandedObjectWithParent>;
+    const [itemKey, itemValue] = stack.pop() as [string, Record<string, BrandedObjectWithParent>];
 
-    Object.entries(item).forEach(([key, rawValue]) => {
-      if ((rawValue == null && replacer == null) || key === '$$parent') return;
+    Object.entries(itemValue).forEach(([key, rawValue]) => {
+      if (rawValue == null && replacer == null) return;
 
       const typeOfValue = typeof(rawValue);
-      const flattenedKey = item.$$parent ? `${item.$$parent}.${key}` : key;
+      const flattenedKey = itemKey ? `${itemKey}.${key}` : key;
 
       if (rawValue !== null && typeOfValue === 'object' && !Array.isArray(rawValue)) {
-        rawValue.$$parent = flattenedKey;
-        stack.push(rawValue);
+        stack.push([flattenedKey, rawValue]);
       } else {
         let value = typeOfValue === 'string' ? rawValue : '';
 
