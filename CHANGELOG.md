@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.3
+
+### Patch Changes
+
+- [#32](https://github.com/motss/tyqs/pull/32) [`28b0b3b`](https://github.com/motss/tyqs/commit/28b0b3b6155f80e024b6e5ee97f637e23cfbfd66) Thanks [@motss](https://github.com/motss)! - fix: flatten keys without mutating input
+
 ## 0.1.2
 
 ### Patch Changes
